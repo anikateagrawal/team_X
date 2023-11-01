@@ -14,9 +14,16 @@ router.get('/add/client',(req,res)=>{
 })
 
 router.post('/client',async(req,res)=>{
+    try{
+    console.log(req.body);
     const {name,address,contact,email}=req.body;
     await client.create({name,address,contact,email});
-    res.redirect("/client");
+    res.send("success");
+    }
+    catch(e){
+        console.log(e);
+        res.redirect('/');
+    }
 })
 
 

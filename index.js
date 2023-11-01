@@ -29,7 +29,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/agumentik')
     .then(() => {console.log('DB Connected');
     // seed(); 
 }).catch((err) => console.log(err));
-
+  
 const User = require('./models/user');
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -46,7 +46,7 @@ const store = new MongoDBStore({
     console.log(error);
   });
   
-
+ 
 app.use(session({
   secret: 'Secret Daily Journal',
   resave: true,
