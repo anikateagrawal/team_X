@@ -1,29 +1,27 @@
-const mongoose = require('mongoose');
+const express=require('express');
+const router=express.Router();
+const bill=require('./models/bill');
 
 
-
-const billSchema = new mongoose.Schema({
-    p_name:{
-        type:String,
-        trim:true,
-        required:true
-    },
-    p_price: {
-        type: Number,
-        required: true
-    },
-    taxrate: {
-        type: Number,
-        required:true0
-    },
-    total:{
-        type:number,
-        required:true
-    }
+router.get('/bills',async(req,res)=>{
+    const bills=await bill.find();
+    res.json(bills);
 });
 
 
 
-const client = mongoose.model('Client', clientSchema);
+router.post('/bill',async(req,res)=>{
+    try{
+    console.log(req.body);
+    await bill.create(req.body);
+    res.send("success");
+    }
+    catch(e){
+        console.log(e);
+        res.redirect('/');
+    }
+})
 
-module.exports = client;
+
+
+module.exports= router;

@@ -14,9 +14,12 @@ const authRoutes=require('./authRoutes');
 const passport=require('passport');
 const LocalStrategy=require('passport-local');
 const MongoDBStore = require('express-mongodb-session')(session);
-const dburl='mongodb://127.0.0.1:27017/agumentik';
-const cors=require('cors');
 
+const dburl2='mongodb://127.0.0.1:27017/agumentik';
+const dburl="mongodb+srv://Anikate7316ag:Anikate%4025@cluster0.ofjnmbo.mongodb.net/agumentik";
+
+const cors=require('cors');
+const billRoutes=require("./bill.js");
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -25,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-mongoose.connect('mongodb://127.0.0.1:27017/agumentik')
+mongoose.connect(dburl)
     .then(() => {console.log('DB Connected');
     // seed(); 
 }).catch((err) => console.log(err));
@@ -58,9 +61,11 @@ app.use(passport.session());
 app.use(flash());
 app.use(locals);
 
+app.use(cors());
+app.use(express.json());
 app.use(clientRoutes);
 app.use(authRoutes);
-app.use(cors());
+app.use(billRoutes);
 
 app.get('/',(req,res)=>{
     res.render("home");

@@ -9,9 +9,7 @@ router.get('/client',async(req,res)=>{
     res.json(clients);
 });
 
-router.get('/add/client',(req,res)=>{
-    res.render('client');
-})
+
 
 router.post('/client',async(req,res)=>{
     try{
